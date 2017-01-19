@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Title, Content, Text} from 'native-base';
+import { Container, Header, Title, Text, Content } from 'native-base';
+import RoomPicker from './RoomPicker'
 
 export default class App extends Component {
     render() {
@@ -9,7 +10,7 @@ export default class App extends Component {
                   <Title>Bookie</Title>
               </Header>
               <Content>
-                  <Text>Content will go here...</Text>
+                <RoomPicker />
               </Content>
           </Container>
         );
