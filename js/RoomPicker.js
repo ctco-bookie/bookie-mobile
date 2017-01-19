@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
-import { Text, Input, Content, Button, H1, Container, Header, Title, Icon } from 'native-base';
+import { Text, Input, Content, Button, H1, Container, Header, Title, Icon, InputGroup } from 'native-base';
 
 export default class RoomPicker extends Component {
     render() {
@@ -12,14 +12,12 @@ export default class RoomPicker extends Component {
                     </Button>
                     <Title>Bookie</Title>
                 </Header>
-                <Content style={{backgroundColor: 'yellow', flex: 1}}>
-                    <View style={{flex: 1, justifyContent: 'space-around', backgroundColor: 'red'}}>
-                        <View style={{height: 200, backgroundColor: 'powderblue'}}>
-                            <H1>Pick a room</H1>
-                            <Input placeholder="Room number" />
-                            <Button large onPress={this.navigate}>Book</Button>
-                        </View>
-                    </View>
+                <Content style={{paddingTop: 100}}>
+                    <H1 style={{textAlign: 'center'}}>Pick a room</H1>
+                    <InputGroup borderType='underline' style={{margin: 30}}>
+                        <Input placeholder="Room number" />
+                    </InputGroup>
+                    <Button large onPress={this.navigate} style={{alignSelf: 'center'}}>Book now</Button>
                 </Content>
             </Container>
         );
