@@ -26,6 +26,6 @@ export default class RoomPicker extends Component {
     }
 
     navigate = () => {
-        this.props.navigator.push({id: 'roomList'})
+        this.props.navigator.push({id: 'roomList', roomNumber: '408'})
     }
 }
