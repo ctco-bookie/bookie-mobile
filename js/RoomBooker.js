@@ -146,7 +146,7 @@ class RoomBooker extends Component {
 
 RoomBooker.propTypes = {
     data: PropTypes.shape({
-        roomAvailability: PropTypes.object,
+        room: PropTypes.object,
         loading: PropTypes.bool.isRequired,
     }).isRequired,
     roomNumber: PropTypes.number.isRequired,
