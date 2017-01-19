@@ -1,5 +1,17 @@
 import React, {Component, PropTypes} from 'react';
-import { Container, Header, Title, Content, Text, Button, Icon, Card, CardItem} from 'native-base';
+
+import {
+    Container,
+    Header,
+    Title,
+    Content,
+    Text,
+    Button,
+    Icon,
+    Card,
+    CardItem,
+    Spinner
+} from 'native-base';
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
@@ -7,13 +19,12 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 
 class RoomList extends Component {
-
     render() {
         return (
             <Container>
                 <Header>
                     <Button transparent onPress={this.goBack}>
-                        <Icon name='ios-arrow-back' />
+                        <Icon name='ios-arrow-back'/>
                     </Button>
                     <Title>Bookie</Title>
                 </Header>
@@ -21,9 +32,9 @@ class RoomList extends Component {
                     <Text>Room list</Text>
                     {
                         this.props.data.loading ?
-                        (<Text>Loading...</Text>)
-                        :
-                        (this.renderAvailableRooms(this.props.data.roomsOnFloor))
+                            (<Spinner/>)
+                            :
+                            (this.renderAvailableRooms(this.props.data.roomsOnFloor))
                     }
                 </Content>
             </Container>
@@ -31,11 +42,12 @@ class RoomList extends Component {
     }
 
     goBack = () => {
-      this.props.navigator.pop();
+        this.props.navigator.pop();
     };
 
     renderAvailableRooms = (rooms) => {
-        rooms = (rooms || []).filter(room => !room.availability.busy).sort((a, b) => a.number - b.number);
+        rooms = (rooms || []).filter(room => !room.availability.busy)
+            .sort((a, b) => a.number - b.number);
         return rooms.map(this.renderRoomCard);
     };
 
@@ -58,7 +70,8 @@ class RoomList extends Component {
 
 
     renderTimeStatus = (room) => {
-        return room.availability.busy ? 'busy till ' + room.availability.availableFrom : 'available ' + room.availability.availableFor;
+        return room.availability.busy ? `busy till ${room.availability.availableFrom}`
+                                      : `available ${room.availability.availableFor}`;
     };
 
 }
@@ -68,7 +81,8 @@ RoomList.propTypes = {
         roomsOnFloor: PropTypes.arrayOf(PropTypes.object),
         loading: PropTypes.bool.isRequired,
     }).isRequired,
-    roomNumber: PropTypes.string.isRequired
+    roomNumber: PropTypes.string.isRequired,
+    navigator: PropTypes.object.isRequired
 };
 
 

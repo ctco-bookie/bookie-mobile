@@ -1,6 +1,18 @@
 import React, {Component} from 'react';
+
 import { View } from 'react-native';
-import { Text, Input, Content, Button, H1, Container, Header, Title, Icon, InputGroup } from 'native-base';
+
+import {
+    Input,
+    Content,
+    Button,
+    H1,
+    Container,
+    Header,
+    Title,
+    Icon,
+    InputGroup
+} from 'native-base';
 
 export default class RoomPicker extends Component {
     constructor(props) {
@@ -12,9 +24,6 @@ export default class RoomPicker extends Component {
         return (
             <Container>
                 <Header>
-                    <Button transparent onPress={this.goBack}>
-                        <Icon name='ios-arrow-back' />
-                    </Button>
                     <Title>Bookie</Title>
                 </Header>
                 <Content style={{paddingTop: 100}}>
@@ -29,8 +38,8 @@ export default class RoomPicker extends Component {
     }
 
     navigate = () => {
-        this.props.navigator.push({id: 'roomList', roomNumber: this.state.room})
-    }
+        this.props.navigator.push({id: 'roomList', roomNumber: this.state.room});
+    };
 
     roomChange = (room) => {
         this.setState({

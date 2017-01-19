@@ -4,6 +4,7 @@ import ApolloClient, {createNetworkInterface} from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 
 import {Navigator} from 'react-native';
+
 import RoomPicker from './RoomPicker';
 import RoomList from './RoomList';
 
@@ -11,9 +12,7 @@ import {
     BACKEND_URL
 } from 'react-native-dotenv';
 
-
 export default class App extends Component {
-
     render() {
         const client = new ApolloClient({
             networkInterface: createNetworkInterface({uri: `${BACKEND_URL}/graphql`})
@@ -24,7 +23,8 @@ export default class App extends Component {
                 <Navigator
                     initialRoute={{id: 'roomPicker'}}
                     renderScene={this.renderScene}
-                ></Navigator>
+                >
+                </Navigator>
             </ApolloProvider>
         );
     }
@@ -35,7 +35,7 @@ export default class App extends Component {
                 return <RoomPicker navigator={navigator} />
             }
             case 'roomList': {
-                return <RoomList navigator={navigator}  roomNumber={route.roomNumber} />
+                return <RoomList navigator={navigator} roomNumber={route.roomNumber} />
             }
         }
     }
