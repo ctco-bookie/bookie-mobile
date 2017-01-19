@@ -78,9 +78,7 @@ class RoomBooker extends Component {
                     </Button>
                     <Title>Bookie</Title>
                 </Header>
-                <Content>
-                    {this.renderContents(room)}
-                </Content>
+                <Content>{this.renderContents(room)}</Content>
             </Container>
         );
     }
