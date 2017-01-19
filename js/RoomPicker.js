@@ -1,17 +1,31 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
-import { Text, Input, Content, Button, H1 } from 'native-base';
+import { Text, Input, Content, Button, H1, Container, Header, Title, Icon } from 'native-base';
 
 export default class RoomPicker extends Component {
     render() {
         return (
-            <View style={{flex: 1, backgroundColor: 'red'}}>
-                <View style={{backgroundColor: 'powderblue'}}>
-                    <H1>Pick a room</H1>
-                    <Input placeholder="Room number" />
-                    <Button large>Book</Button>
-                </View>
-            </View>
+            <Container>
+                <Header>
+                    <Button transparent onPress={this.goBack}>
+                        <Icon name='ios-arrow-back' />
+                    </Button>
+                    <Title>Bookie</Title>
+                </Header>
+                <Content>
+                    <View style={{flex: 1, justifyContent: 'space-around'}}>
+                        <View style={{height: 200, backgroundColor: 'powderblue'}}>
+                            <H1>Pick a room</H1>
+                            <Input placeholder="Room number" />
+                            <Button large onPress={this.navigate}>Book</Button>
+                        </View>
+                    </View>
+                </Content>
+            </Container>
         );
+    }
+
+    navigate = () => {
+        this.props.navigator.push({id: 'roomList'})
     }
 }
