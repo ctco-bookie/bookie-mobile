@@ -11,6 +11,9 @@ import {
   Text,
   View
 } from 'react-native';
+import {
+    BACKEND_URL
+} from 'react-native-dotenv';
 
 export default class Bookie extends Component {
   render() {
@@ -25,6 +28,9 @@ export default class Bookie extends Component {
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
+        </Text>
+        <Text>
+          Backend is {BACKEND_URL}
         </Text>
       </View>
     );
