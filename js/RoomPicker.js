@@ -12,8 +12,8 @@ export default class RoomPicker extends Component {
                     </Button>
                     <Title>Bookie</Title>
                 </Header>
-                <Content>
-                    <View style={{flex: 1, justifyContent: 'space-around'}}>
+                <Content style={{backgroundColor: 'yellow', flex: 1}}>
+                    <View style={{flex: 1, justifyContent: 'space-around', backgroundColor: 'red'}}>
                         <View style={{height: 200, backgroundColor: 'powderblue'}}>
                             <H1>Pick a room</H1>
                             <Input placeholder="Room number" />
