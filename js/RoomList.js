@@ -29,10 +29,12 @@ class RoomList extends Component {
                     <Title>Bookie</Title>
                 </Header>
                 <Content>
-                    <Text>Room list</Text>
                     {
                         this.props.data.loading ?
-                            (<Spinner/>)
+                            (<Content>
+                                <Spinner/>
+                                <Text>Checking room availability</Text>
+                            </Content>)
                             :
                             (this.renderAvailableRooms(this.props.data.roomsOnFloor))
                     }
@@ -47,8 +49,13 @@ class RoomList extends Component {
 
     renderAvailableRooms = (rooms) => {
         rooms = (rooms || []).filter(room => !room.availability.busy)
-            .sort((a, b) => a.number - b.number);
-        return rooms.map(this.renderRoomCard);
+                             .sort((a, b) => a.number - b.number);
+        return (
+            <Content>
+                <Text>Available rooms on this floor</Text>
+                {rooms.map(this.renderRoomCard)}
+            </Content>
+        );
     };
 
     renderRoomCard = (room) => {
@@ -62,12 +69,15 @@ class RoomList extends Component {
                     <Text>{this.renderTimeStatus(room)}</Text>
                 </CardItem>
                 <CardItem footer>
-                    <Button>Book {room.name}</Button>
+                    <Button onPress={() => this.bookRoom(room.number)}>Book {room.name}</Button>
                 </CardItem>
             </Card>
         );
     };
 
+    bookRoom = (roomNumber) => {
+        this.props.navigator.push({id: 'roomBook', roomNumber});
+    };
 
     renderTimeStatus = (room) => {
         return room.availability.busy ? `busy till ${room.availability.availableFrom}`

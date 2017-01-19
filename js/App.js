@@ -7,6 +7,7 @@ import {Navigator} from 'react-native';
 
 import RoomPicker from './RoomPicker';
 import RoomList from './RoomList';
+import RoomBooker from './RoomBooker';
 
 import {
     BACKEND_URL
@@ -36,6 +37,9 @@ export default class App extends Component {
             }
             case 'roomList': {
                 return <RoomList navigator={navigator} roomNumber={route.roomNumber} />
+            }
+            case 'roomBook': {
+                return <RoomBooker navigator={navigator} roomNumber={route.roomNumber} />
             }
         }
     }
