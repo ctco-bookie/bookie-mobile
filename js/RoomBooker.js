@@ -114,7 +114,7 @@ class RoomBooker extends Component {
                         return (
                             <ListItem key={option.label}>
                                 <Radio
-                                    selected={this.state.selectedOption.label === option.label}
+                                    selected={option.duration === this.state.selectedOption.duration}
                                     onPress={() => this.setState({selectedOption: option})}
                                 />
                                 <Text>{option.label}</Text>
