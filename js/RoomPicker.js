@@ -10,7 +10,7 @@ import {
     Container,
     Header,
     Title,
-    Icon,
+    Text,
     InputGroup
 } from 'native-base';
 
@@ -32,6 +32,8 @@ export default class RoomPicker extends Component {
                         <Input value={this.state.room} onChangeText={this.roomChange} keyboardType="numeric" />
                     </InputGroup>
                     <Button large onPress={this.navigate} style={{alignSelf: 'center'}}>Book now</Button>
+                    <Text>OR</Text>
+                    <Button large onPress={this.scan} style={{alignSelf: 'center'}}>Scan QR Code now</Button>
                 </Content>
             </Container>
         );
@@ -39,6 +41,10 @@ export default class RoomPicker extends Component {
 
     navigate = () => {
         this.props.navigator.push({id: 'roomList', roomNumber: this.state.room});
+    };
+
+    scan = () => {
+        this.props.navigator.push({id: 'qrScan'});
     };
 
     roomChange = (room) => {

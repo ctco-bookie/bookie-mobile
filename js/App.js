@@ -8,6 +8,7 @@ import {Navigator} from 'react-native';
 import RoomPicker from './RoomPicker';
 import RoomList from './RoomList';
 import RoomBooker from './RoomBooker';
+import QRCodeScan from './QRCodeScan';
 
 import {
     BACKEND_URL
@@ -40,6 +41,9 @@ export default class App extends Component {
             }
             case 'roomBook': {
                 return <RoomBooker navigator={navigator} roomNumber={route.roomNumber} />
+            }
+            case 'qrScan': {
+                return <QRCodeScan navigator={navigator}/>
             }
         }
     }
