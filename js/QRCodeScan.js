@@ -44,7 +44,7 @@ export default class QRCodeScan extends Component {
     }
 
     goBack = () => {
-        this.props.navigator.pop();
+        this.props.navigator.resetTo({id: 'roomPicker'});
     };
 
     renderCamera = () => {
@@ -72,7 +72,7 @@ export default class QRCodeScan extends Component {
         const pattern = /.*\/room\/(\d+)\/check/;
         const groups = pattern.exec(e.data);
         const roomNumber = groups[1];
-        this.props.navigator.push({id: 'roomList', roomNumber});
+        this.props.navigator.resetTo({id: 'roomList', roomNumber});
     };
 
 }

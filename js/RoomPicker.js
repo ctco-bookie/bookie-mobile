@@ -40,11 +40,11 @@ export default class RoomPicker extends Component {
     }
 
     navigate = () => {
-        this.props.navigator.push({id: 'roomList', roomNumber: this.state.room});
+        this.props.navigator.resetTo({id: 'roomList', roomNumber: this.state.room});
     };
 
     scan = () => {
-        this.props.navigator.push({id: 'qrScan'});
+        this.props.navigator.resetTo({id: 'qrScan'});
     };
 
     roomChange = (room) => {

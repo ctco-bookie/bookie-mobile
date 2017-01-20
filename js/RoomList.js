@@ -49,7 +49,7 @@ class RoomList extends Component {
     }
 
     goBack = () => {
-        this.props.navigator.pop();
+        this.props.navigator.resetTo({id: 'roomPicker'});
     };
 
     renderLoader = (text) => {
@@ -57,7 +57,7 @@ class RoomList extends Component {
             <Spinner style={{alignSelf: 'center'}}/>
             <Text>{text}</Text>
         </Content>
-    }
+    };
 
     renderAvailableRooms = (rooms) => {
         rooms = (rooms || []).filter(room => !room.availability.busy)
@@ -88,7 +88,7 @@ class RoomList extends Component {
     };
 
     bookRoom = (roomNumber) => {
-        this.props.navigator.push({id: 'roomBook', roomNumber});
+        this.props.navigator.resetTo({id: 'roomBook', roomNumber});
     };
 
     renderTimeStatus = (room) => {
