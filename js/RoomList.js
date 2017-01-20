@@ -31,7 +31,7 @@ class RoomList extends Component {
                     </Button>
                     <Title>Bookie</Title>
                 </Header>
-                <Content>
+                <Content style={{ padding: 10 }}>
                     <View>
                     {
                         this.props.masterRoom.loading ?
@@ -87,7 +87,7 @@ class RoomList extends Component {
                     <FontAwesomeIcon name="user" style={{fontSize: 18, marginBottom: 10}}> {room.capacity}</FontAwesomeIcon>
                     {this.renderTimeStatus(room)}
                 </CardItem>
-                <CardItem footer>
+                <CardItem footer style={{flexDirection: 'row-reverse'}}>
                     <Button onPress={() => this.bookRoom(room.number)}>Book {room.name}</Button>
                 </CardItem>
             </Card>
