@@ -10,7 +10,8 @@ import {
     Icon,
     Card,
     CardItem,
-    Spinner
+    Spinner,
+    Badge
 } from 'native-base';
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -77,8 +78,8 @@ class RoomList extends Component {
                     <Text>{room.name} ({room.number})</Text>
                 </CardItem>
                 <CardItem>
-                    <FontAwesomeIcon name="user"> {room.capacity}</FontAwesomeIcon>
-                    <Text>{this.renderTimeStatus(room)}</Text>
+                    <FontAwesomeIcon name="user" style={{fontSize: 18, marginBottom: 10}}> {room.capacity}</FontAwesomeIcon>
+                    {this.renderTimeStatus(room)}
                 </CardItem>
                 <CardItem footer>
                     <Button onPress={() => this.bookRoom(room.number)}>Book {room.name}</Button>
@@ -92,8 +93,9 @@ class RoomList extends Component {
     };
 
     renderTimeStatus = (room) => {
-        return room.availability.busy ? `busy till ${room.availability.availableFrom}`
-                                      : `available ${room.availability.availableFor}`;
+        return room.availability.busy 
+            ? <FontAwesomeIcon name="times" style={{fontSize: 18, color: 'red'}}> busy till {room.availability.availableFrom}</FontAwesomeIcon>
+            : <FontAwesomeIcon name="check-circle" style={{fontSize: 18, color: 'green'}}> available for {room.availability.availableFor}</FontAwesomeIcon>;
     };
 
 }
