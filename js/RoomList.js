@@ -96,9 +96,14 @@ class RoomList extends Component {
                     <FontAwesomeIcon name="user" style={{fontSize: 18, marginBottom: 10}}> {room.capacity}</FontAwesomeIcon>
                     {this.renderTimeStatus(room)}
                 </CardItem>
-                <CardItem footer style={{flexDirection: 'row-reverse'}}>
-                    <Button onPress={() => this.bookRoom(room.number)}>Book {room.name}</Button>
-                </CardItem>
+                {
+                    room.availability.busy ?
+                        <View></View>
+                        :
+                        <CardItem footer style={{flexDirection: 'row-reverse'}}>
+                            <Button onPress={() => this.bookRoom(room.number)}>Book {room.name}</Button>
+                        </CardItem>
+                }
             </Card>
         );
     };
@@ -134,9 +139,9 @@ const rooomAvailabilityFragment = gql`
         number
         capacity
         availability {
-        busy
-        availableFor
-        availableFrom
+            busy
+            availableFor
+            availableFrom
         }
     }
 `;
