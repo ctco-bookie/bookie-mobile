@@ -10,8 +10,6 @@ import {
     Icon,
     Card,
     CardItem,
-    Spinner,
-    Badge
 } from 'native-base';
 
 import { View } from 'react-native';
@@ -22,6 +20,7 @@ import {graphql, compose} from 'react-apollo';
 import gql from 'graphql-tag';
 
 import RoomNotFound from './RoomNotFound';
+import Loader from './Loader';
 
 class RoomList extends Component {
     render() {
@@ -41,7 +40,7 @@ class RoomList extends Component {
                         {
                             (!this.props.masterRoom.loading) ?
                                 this.props.availableRooms.loading ?
-                                    this.renderLoader('Finding available rooms')
+                                    <Loader text="Finding available rooms" />
                                     :
                                     (this.renderAvailableRooms(this.props.availableRooms.roomsOnFloor))
                                 : <Text></Text>
@@ -54,7 +53,7 @@ class RoomList extends Component {
 
     renderMasterRoom(masterRoom) {
         if (masterRoom.loading) {
-            return this.renderLoader('Checking room availability');
+            return <Loader text="Checking room availability" />;
         } else {
             if (!masterRoom.floorMasterRoom) {
                 RoomNotFound.show(this.props.navigator, this.props.roomNumber);
@@ -66,13 +65,6 @@ class RoomList extends Component {
 
     goBack = () => {
         this.props.navigator.resetTo({id: 'roomPicker'});
-    };
-
-    renderLoader = (text) => {
-        return <Content style={{alignSelf: 'center'}}>
-            <Spinner style={{alignSelf: 'center'}}/>
-            <Text>{text}</Text>
-        </Content>
     };
 
     renderAvailableRooms = (rooms) => {
@@ -101,15 +93,15 @@ class RoomList extends Component {
                         <View></View>
                         :
                         <CardItem footer style={{flexDirection: 'row-reverse'}}>
-                            <Button onPress={() => this.bookRoom(room.number)}>Book {room.name}</Button>
+                            <Button onPress={() => this.bookRoom(room)}>Book {room.name}</Button>
                         </CardItem>
                 }
             </Card>
         );
     };
 
-    bookRoom = (roomNumber) => {
-        this.props.navigator.resetTo({id: 'roomBook', roomNumber});
+    bookRoom = (room) => {
+        this.props.navigator.resetTo({id: 'roomBook', room});
     };
 
     renderTimeStatus = (room) => {
