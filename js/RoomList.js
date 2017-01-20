@@ -15,7 +15,7 @@ import {
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-import {graphql} from 'react-apollo';
+import {graphql, compose} from 'react-apollo';
 import gql from 'graphql-tag';
 
 class RoomList extends Component {
@@ -30,13 +30,18 @@ class RoomList extends Component {
                 </Header>
                 <Content>
                     {
-                        this.props.data.loading ?
-                            (<Content>
-                                <Spinner/>
-                                <Text>Checking room availability</Text>
-                            </Content>)
+                        this.props.masterRoom.loading ?
+                            this.renderLoader('Checking room availability')
                             :
-                            (this.renderAvailableRooms(this.props.data.roomsOnFloor))
+                            (this.renderRoomCard(this.props.masterRoom.floorMasterRoom))
+                    }
+                </Content>
+                <Content>
+                    {
+                        this.props.availableRooms.loading ?
+                            this.renderLoader('Finding available rooms')
+                            :
+                            (this.renderAvailableRooms(this.props.availableRooms.roomsOnFloor))
                     }
                 </Content>
             </Container>
@@ -46,6 +51,13 @@ class RoomList extends Component {
     goBack = () => {
         this.props.navigator.pop();
     };
+
+    renderLoader = (text) => {
+        return <Content style={{alignSelf: 'center'}}>
+            <Spinner style={{alignSelf: 'center'}}/>
+            <Text>{text}</Text>
+        </Content>
+    }
 
     renderAvailableRooms = (rooms) => {
         rooms = (rooms || []).filter(room => !room.availability.busy)
@@ -87,7 +99,11 @@ class RoomList extends Component {
 }
 
 RoomList.propTypes = {
-    data: PropTypes.shape({
+    availableRooms: PropTypes.shape({
+        roomsOnFloor: PropTypes.arrayOf(PropTypes.object),
+        loading: PropTypes.bool.isRequired,
+    }).isRequired,
+    masterRoom: PropTypes.shape({
         roomsOnFloor: PropTypes.arrayOf(PropTypes.object),
         loading: PropTypes.bool.isRequired,
     }).isRequired,
@@ -111,6 +127,28 @@ const FloorRoomsQuery = gql`
   }
 `;
 
-export default graphql(FloorRoomsQuery, {
-    options: ({roomNumber}) => ({variables: {roomNumber}}),
-})(RoomList);
+const MasterRoomQuery = gql`
+  query MasterRoomQuery($roomNumber: Int!){
+    floorMasterRoom: room(roomNumber: $roomNumber) {
+      name
+      number
+      capacity
+      availability {
+        busy
+        availableFor
+        availableFrom
+      }
+    }
+  }
+`;
+
+export default compose(
+    graphql(FloorRoomsQuery, {
+        options: ({roomNumber}) => ({variables: {roomNumber}}),
+        name: 'availableRooms'    
+    }),
+    graphql(MasterRoomQuery, {
+        options: ({roomNumber}) => ({variables: {roomNumber}}),
+        name: 'masterRoom'
+    })
+)(RoomList);
