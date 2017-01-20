@@ -21,6 +21,8 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {graphql, compose} from 'react-apollo';
 import gql from 'graphql-tag';
 
+import RoomNotFound from './RoomNotFound';
+
 class RoomList extends Component {
     render() {
         return (
@@ -33,12 +35,7 @@ class RoomList extends Component {
                 </Header>
                 <Content style={{ padding: 10 }}>
                     <View>
-                    {
-                        this.props.masterRoom.loading ?
-                            this.renderLoader('Checking room availability')
-                            :
-                            (this.renderRoomCard(this.props.masterRoom.floorMasterRoom))
-                    }
+                        {this.renderMasterRoom(this.props.masterRoom)}
                     </View>
                     <View>
                         {
@@ -53,6 +50,18 @@ class RoomList extends Component {
                 </Content>
             </Container>
         );
+    }
+
+    renderMasterRoom(masterRoom) {
+        if (masterRoom.loading) {
+            return this.renderLoader('Checking room availability');
+        } else {
+            if (!masterRoom.floorMasterRoom) {
+                RoomNotFound.show(this.props.navigator, this.props.roomNumber);
+            } else {
+                return this.renderRoomCard(masterRoom.floorMasterRoom);
+            }
+        }
     }
 
     goBack = () => {

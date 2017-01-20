@@ -40,7 +40,7 @@ export default class App extends Component {
                 return <RoomList navigator={navigator} roomNumber={route.roomNumber} />
             }
             case 'roomBook': {
-                return <RoomBooker navigator={navigator} roomNumber={route.roomNumber} />
+                return <RoomBooker navigator={navigator} room={route.room} />
             }
             case 'qrScan': {
                 return <QRCodeScan navigator={navigator}/>
