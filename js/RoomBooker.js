@@ -20,6 +20,7 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 
 import bookingOptions from './booking-options';
+import Loader from './Loader';
 
 class RoomBooker extends Component {
     constructor() {
@@ -41,9 +42,8 @@ class RoomBooker extends Component {
                     <Header>
                         <Title>Bookie</Title>
                     </Header>
-                    <Content>
-                        <Spinner/>
-                        <Text>Booking room now</Text>
+                    <Content style={{ padding: 10 }}>
+                        <Loader text="Booking room now" />
                     </Content>
                 </Container>
             );
@@ -64,7 +64,7 @@ class RoomBooker extends Component {
                     </Button>
                     <Title>Bookie</Title>
                 </Header>
-                <Content>{this.renderContents(room)}</Content>
+                <Content style={{ padding: 10 }}>{this.renderContents(room)}</Content>
             </Container>
         );
     }
