@@ -29,7 +29,7 @@ export default class RoomPicker extends Component {
                 <Content style={{paddingTop: 100}}>
                     <H1 style={{textAlign: 'center'}}>Pick a room</H1>
                     <InputGroup borderType='underline' style={{margin: 30}}>
-                        <Input value={this.state.room} onChangeText={this.roomChange} />
+                        <Input value={this.state.room} onChangeText={this.roomChange} keyboardType="numeric" />
                     </InputGroup>
                     <Button large onPress={this.navigate} style={{alignSelf: 'center'}}>Book now</Button>
                 </Content>
