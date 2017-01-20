@@ -111,35 +111,35 @@ RoomList.propTypes = {
     navigator: PropTypes.object.isRequired
 };
 
+const rooomAvailabilityFragment = gql`
+    fragment roomAvailability on Room {
+        name
+        number
+        capacity
+        availability {
+        busy
+        availableFor
+        availableFrom
+        }
+    }
+`;
 
 const FloorRoomsQuery = gql`
   query AvailableRoomsQuery($roomNumber: Int!){
     roomsOnFloor: rooms(floorMasterRoomNumber: $roomNumber) {
-      name
-      number
-      capacity
-      availability {
-        busy
-        availableFor
-        availableFrom
-      }
+      ...roomAvailability
     }
   }
+  ${rooomAvailabilityFragment}
 `;
 
 const MasterRoomQuery = gql`
   query MasterRoomQuery($roomNumber: Int!){
     floorMasterRoom: room(roomNumber: $roomNumber) {
-      name
-      number
-      capacity
-      availability {
-        busy
-        availableFor
-        availableFrom
-      }
+      ...roomAvailability
     }
   }
+  ${rooomAvailabilityFragment}
 `;
 
 export default compose(
