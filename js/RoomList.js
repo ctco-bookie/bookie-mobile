@@ -101,15 +101,15 @@ class RoomList extends Component {
                         <View></View>
                         :
                         <CardItem footer style={{flexDirection: 'row-reverse'}}>
-                            <Button onPress={() => this.bookRoom(room.number)}>Book {room.name}</Button>
+                            <Button onPress={() => this.bookRoom(room)}>Book {room.name}</Button>
                         </CardItem>
                 }
             </Card>
         );
     };
 
-    bookRoom = (roomNumber) => {
-        this.props.navigator.resetTo({id: 'roomBook', roomNumber});
+    bookRoom = (room) => {
+        this.props.navigator.resetTo({id: 'roomBook', room});
     };
 
     renderTimeStatus = (room) => {
