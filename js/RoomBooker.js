@@ -13,8 +13,11 @@ import {
     List,
     ListItem,
     Radio,
-    Spinner
+    H1
 } from 'native-base';
+
+import {View} from 'react-native';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
@@ -42,8 +45,8 @@ class RoomBooker extends Component {
                     <Header>
                         <Title>Bookie</Title>
                     </Header>
-                    <Content style={{ padding: 10 }}>
-                        <Loader text="Booking room now" />
+                    <Content style={{padding: 10}}>
+                        <Loader text="Booking room now"/>
                     </Content>
                 </Container>
             );
@@ -64,7 +67,7 @@ class RoomBooker extends Component {
                     </Button>
                     <Title>Bookie</Title>
                 </Header>
-                <Content style={{ padding: 10 }}>{this.renderContents(room)}</Content>
+                <Content style={{padding: 10}}>{this.renderContents(room)}</Content>
             </Container>
         );
     }
@@ -79,15 +82,21 @@ class RoomBooker extends Component {
         }
     };
 
-    renderBookResult() {
-        return (
-            <Text>{this.state.result.message}</Text>
-        )
+    renderSuccess = () => {
+        return (<View style={{padding: 20}}>
+                <H1 style={{textAlign: 'center', color: 'green'}}>{this.state.result.message}</H1>
+                <FontAwesomeIcon name="check-circle-o" style={{fontSize: 250, color: 'green', alignSelf: 'center'}}/>
+            </View>
+        );
     };
 
-    renderSuccess = () => this.renderBookResult();
-
-    renderFail = () => this.renderBookResult();
+    renderFail = () => {
+        return (<View style={{padding: 20}}>
+                <H1 style={{textAlign: 'center', color: 'red'}}>{this.state.result.message}</H1>
+                <FontAwesomeIcon name="times-circle-o" style={{fontSize: 250, color: 'red', alignSelf: 'center'}}/>
+            </View>
+        );
+    };
 
     renderForm = (room) => {
         return (
@@ -137,7 +146,7 @@ RoomBooker.propTypes = {
 
 const BookMutation = gql`
   mutation BookMutation($roomNumber: Int!, $bookForMinutes: Int!){
-    bookRoom(roomNumber: $roomNumber, bookForMinutes: $bookForMinutes) {
+    bookRoom(roomNumber: $roomNumber, bookForMinutes: $bookForMinutes, dryRun: true) {
       success
       message
     }
