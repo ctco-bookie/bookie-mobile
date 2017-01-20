@@ -146,7 +146,7 @@ RoomBooker.propTypes = {
 
 const BookMutation = gql`
   mutation BookMutation($roomNumber: Int!, $bookForMinutes: Int!){
-    bookRoom(roomNumber: $roomNumber, bookForMinutes: $bookForMinutes, dryRun: true) {
+    bookRoom(roomNumber: $roomNumber, bookForMinutes: $bookForMinutes) {
       success
       message
     }
