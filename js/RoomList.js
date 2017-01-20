@@ -14,6 +14,8 @@ import {
     Badge
 } from 'native-base';
 
+import { View } from 'react-native';
+
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import {graphql, compose} from 'react-apollo';
@@ -30,20 +32,24 @@ class RoomList extends Component {
                     <Title>Bookie</Title>
                 </Header>
                 <Content>
+                    <View>
                     {
                         this.props.masterRoom.loading ?
                             this.renderLoader('Checking room availability')
                             :
                             (this.renderRoomCard(this.props.masterRoom.floorMasterRoom))
                     }
-                </Content>
-                <Content>
-                    {
-                        this.props.availableRooms.loading ?
-                            this.renderLoader('Finding available rooms')
-                            :
-                            (this.renderAvailableRooms(this.props.availableRooms.roomsOnFloor))
-                    }
+                    </View>
+                    <View>
+                        {
+                            (!this.props.masterRoom.loading) ?
+                                this.props.availableRooms.loading ?
+                                    this.renderLoader('Finding available rooms')
+                                    :
+                                    (this.renderAvailableRooms(this.props.availableRooms.roomsOnFloor))
+                                : <Text></Text>
+                        }
+                    </View>
                 </Content>
             </Container>
         );
@@ -65,7 +71,7 @@ class RoomList extends Component {
                              .sort((a, b) => a.number - b.number);
         return (
             <Content>
-                <Text>Available rooms on this floor</Text>
+                <Text style={{marginTop: 20}}>Available rooms on this floor</Text>
                 {rooms.map(this.renderRoomCard)}
             </Content>
         );
