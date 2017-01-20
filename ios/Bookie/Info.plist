@@ -31,6 +31,8 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSCameraUsageDescription</key>
+    <string>We are using camera to scan QR codes</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

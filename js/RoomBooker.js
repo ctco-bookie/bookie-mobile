@@ -136,11 +136,11 @@ class RoomBooker extends Component {
     };
 
     goBackToPicker = () => {
-        this.props.navigator.push({id: 'roomPicker'});
+        this.props.navigator.resetTo({id: 'roomPicker'});
     };
 
     goBack = () => {
-        this.props.navigator.pop();
+        this.props.navigator.resetTo({id: 'roomList', roomNumber: this.props.roomNumber});
     };
 }
 
