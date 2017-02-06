@@ -7,10 +7,7 @@ import {
     Input,
     Content,
     Button,
-    H1,
     Container,
-    Header,
-    Title,
     Text,
     InputGroup
 } from 'native-base';
@@ -30,7 +27,14 @@ export default class RoomPicker extends Component {
                         <InputGroup borderType='underline' style={{margin: 30, marginRight: 10, marginLeft: 0, width: 180}}>
                             <Input value={this.state.room} onChangeText={this.roomChange} keyboardType="numeric" style={{fontSize: 25, height: 60}} placeholder="Room number" />
                         </InputGroup>
-                        <Button large onPress={this.navigate} style={{alignSelf: 'center'}}>Book Now</Button>
+                        <Button
+                            large
+                            onPress={this.navigate}
+                            style={{alignSelf: 'center'}}
+                            disabled={!this.state.room || !this.state.room.length}
+                        >
+                            Book Now
+                        </Button>
                     </View>
                     <Text style={{fontSize: 25, lineHeight: 25}}>OR</Text>
                     <Button large onPress={this.scan} style={{alignSelf: 'center', marginTop: 20}}>
