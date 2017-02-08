@@ -118,7 +118,13 @@ class RoomBooker extends Component {
                     })}
                 </List>
                 <CardItem>
-                    <Button onPress={this.book} style={{alignSelf: 'center'}}>Book now</Button>
+                    <Button
+                        info
+                        onPress={this.book}
+                        style={{alignSelf: 'center'}}
+                    >
+                        Book now
+                    </Button>
                 </CardItem>
             </Card>
         );

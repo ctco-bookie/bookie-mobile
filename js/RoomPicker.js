@@ -29,6 +29,7 @@ export default class RoomPicker extends Component {
                         </InputGroup>
                         <Button
                             large
+                            info
                             onPress={this.navigate}
                             style={{alignSelf: 'center'}}
                             disabled={!this.state.room || !this.state.room.length}
