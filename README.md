@@ -1,4 +1,3 @@
-Doing some changes to showcase pull requests
 # How to start
 
 ## Installation
